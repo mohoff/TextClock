@@ -1,0 +1,196 @@
+ES IST
+
+
+FÜNF VOR ZEHN (UND) VIERTEL ZWANZIG NACH HALB VOR
+
+
+EINS ZWEI DREI VIER FÜNF SECHS SIEBEN ACHT NEUN ZEHN ELF ZWÖLF
+-->ACHT EINS-SECHS-SIEBEN-NEUN ZWEI ZEHN ZWÖLF-FÜNF DREI ELF VIER 
+
+UHR
+
+
+-----
+
+
+ES IST
+
+FÜNF VOR ZEHN VIERTEL WANZIG NACH HALB VOR
+
+FÜNFVORZEHNVIERTELZWANZIGNACHHALBVOR
+
+fünf vor
+fünf nach
+zehn nach
+zehn vor
+viertel nach
+viertel vor
+zwanzig vor
+zwanzig nach
+fünf vor halb
+fünf nach halb
+
+
+1.) zwafnzvieühnfrgtel	vornachhalb			--> 29 buchstaben
+2.) zwfuanzvigehnfrtel	vornachhalb			--> 29 buchstaben
+
+
+1.) ASZWODRELFVINCHSTERBEUENF 					--> 25 buchstaben // +29 = 54 buchstaben
+2.)       	    ZWO   E                     LF						EINS ZWEI DREI VIER FUENF SECHS SIEBEN ACHT NEUN ZEHN ELF
+	FU    	    ZWO   E                   N LF 				--> fuenf, elf, zwölf
+	FU    	    ZWO   E          H   I    N LF 				--> fuenf, elf, zwölf, zwei, zehn
+	FU DR 	    ZWO   E          H   I    N LF L S 				--> fuenf, elf, zwölf, zwei, zehn, eins, drei
+	FU DR 	    ZWO   E          H   I    N LF L S 				--> fuenf, elf, zwölf, zwei, zehn, eins, drei			// vier, sechs, sieben, acht, neun
+	FU DR S   I ZWO   E        C H   I BE N LF L S 				--> fuenf, elf, zwölf, zwei, zehn, eins, drei, sechs, sieben		// vier, acht, neun
+	   DR S   I ZWO N E   FU   C H   I BE N LF L S 				--> fuenf, elf, zwölf, zwei, zehn, eins, drei, sechs, sieben, neun		// vier, acht
+	   DR S V I ZWO N E R FU A C H T I BE N LF L S 				--> fuenf, elf, zwölf, zwei, zehn, eins, drei, sechs, sieben, neun, vier, acht
+	   DR S V I ZWO N E R FU A C H T I BE N LF L S 				--> fuenf, elf, zwölf, zwei, zehn, eins, drei, sechs, sieben, neun, vier, acht, null
+	   --> 25 Buchstaben
+	   
+	 ----  
+	   (ES IST UHR --> + 8 Buchstaben)
+	   
+	   29 + 25 = 54!			(18*3=54)
+	
+	
+	BSP 6x10-Matrix:
+	
+		E S I S T Z W F U A
+		N Z V I G E H N F R
+		T E L V O R N A C H
+		A L B D R S V I Z W
+		O N E R F U A C H T
+		I B E N L F S U H R
+		
+	UPDATE	1:
+		
+		E S
+		I S T
+		Z W F U A N Z V I G
+		E H N F R T E L V O
+		R N A C H A L B D R
+		S V I Z W O N E R F
+		U A C H T I B E N L
+		F L S
+	
+	DRAFT 1:
+
+		(KREIS)(FORM DIE DREIECK VERVOLLSTÄNDIGT)
+		
+		E S
+		I S T
+		
+		C I R C A
+		
+		Z W	F U A N Z
+		V I	G E	H N F R
+		T E L V O R N A C
+		H H	A L B D R S
+		V I Z W O N E
+		R F U A C H
+		T I B E N
+		L F L S
+		U H R
+		
+	DRAFT 2 (zahlenvorat nicht aktuell!):	
+		
+1		E S
+2		I S T
+3		
+4		Z
+5		W F
+6		U A	N
+7		Z V I G
+8		E H	N F	R
+9		T E L V O R
+10		N A C H	H A	L
+11		B D R S V I	Z W
+12		O N E R F U A
+13		C H	T I B E
+14		N L	F L	S
+	
+	
+	
+	
+	algorithmus-ansätze:
+	--------------------------
+	var min = new Date().getMinutes();
+	var hr = new Date().getSeconds();
+	var sec = new Date().getHours();
+	
+	
+					// 0: zwischen 0 und 10 min; 1: zwischen 10 und 20min
+	factormin = min/10;
+	round(factormin) auf ganze zahl;
+	min = min%10;
+		
+	//RUNDEN auf 5er-steps:
+	((min<=1) || ((min==2)&&(sec<30))) ?
+		min = 0;
+		sec = 0;
+	(((min==2)&&(sec>=30)) || (3<=min<=6) || ((min==7)&&(sec<30))) ?
+		min = 5;
+		sec = 0;
+	(((min==7)&&(sec>=30)) || (min>=8)) ?
+		min = 10;
+		sec = 0;
+		
+	minutenzahl = factormin*10+min;		// Minutenanzahl auf 5er-steps gerundet
+	sekundenanzahl = 0;
+	(minutenanzahl >= 25)?				// für z.B. "halb VIER" für "15:30Uhr"
+		stundenanzahl++;
+		
+	switch($minutenzahl):{
+	(0) :""
+	(5) :"fuenfnach"
+	(10):"zehnnach"
+	(15):"viertelnach"
+	(20):"zwanzignach"
+	(25):"fuenfvorhalb"
+	(30):"halb"
+	(35):"fuenfnachhalb"
+	(40):"zwanzigvor"
+	(45):"viertelvor"
+	(50):"zehnvor"
+	(55):"fuenfvor"
+	}
+	
+	switch($stundenzahl):{
+	(0) :"null"					// nicht vorgesehen...
+	(1) :"eins"
+	(2) :"zwei"
+	(3) :"drei"
+	(4) :"vier"
+	(5) :"fuenf"
+	(6) :"sechs"
+	(7) :"sieben"
+	(8) :"acht"
+	(9) :"neun"
+	(10):"zehn"
+	(11):"elf"
+	(12):"zwölf"
+	}
+	
+	$zu_suchenden_string = $minutenzahl + $stundenzahl;			// strings addieren
+	$buchstabensalat-array [X, Y, Z, ............ ]				// Buchstabensalat, der ausgegeben wird
+	
+	buchstabensalat-position = 0;
+	stringposition = 0;
+	while(stringposition != empty)
+	{
+		if (stringposition = buchstabensalat-array position) {
+			css{(color: red)};
+			stringposition++;
+			buchstabensalat-array position++;
+		}
+		else {
+			buchstabensalat-array position++;
+		}
+	}
+	
+	
+	
+	   
+	   
+	   
+	   
