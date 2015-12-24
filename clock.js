@@ -53,7 +53,10 @@ var output;
 function getColor(currentDate){
   var hr = currentDate.getHours();
   var min = currentDate.getMinutes();
-  var colorStartIndex = Math.max(colors.length-1, (Math.floor(hr/3)-2)%colors.length);
+
+  //alert("hr(" + hr + "), " + Math.min(4, (Math.floor(hr/3)-2)));
+
+  var colorStartIndex = Math.min(4, (Math.floor(hr/3)-2));
   var colorStart = colors[colorStartIndex];
   var colorEnd = colors[(colorStartIndex+1)%colors.length];
 
