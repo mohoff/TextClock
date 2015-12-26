@@ -9,7 +9,8 @@ body {
 #wrapper {
   position: relative;
   height: 100%;
-  margin: 25px;
+  margin-left: 25px;
+  margin-right: 25px;
 }
 
 .row {

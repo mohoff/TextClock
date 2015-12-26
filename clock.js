@@ -129,8 +129,17 @@ function tick(){
   // independent of the current time.
   if(min%5 == 0 || !firstLoadDone){
     // Determine height and width of the browser viewport.
-    var height = window.innerHeight - 50; // -50px because there is a 50px margin (see .css)
+    var height = window.innerHeight; // There is no top or bottom margin because default line height takes care of that.
     var width = window.innerWidth - 50; // -50px because there is a 50px margin (see .css)
+
+    // Set padding to 0 in order to prevent accumulation of padding pixels each tick()-call.
+    row1.children[0].style.paddingLeft = "0px";
+    row2.children[0].style.paddingLeft = "0px";
+    row3.children[0].style.paddingLeft = "0px";
+    // Setting margin to 0 actually not needed because clientWidth/etc. all don't take margins into account.
+    row1.style.marginTop = "0px";
+    row2.style.marginTop = "0px";
+    row3.style.marginTop = "0px";
 
     // Determine height and widths of the 3 rows.
     var rowHeight = row1.clientHeight || row1.scrollHeight || row1.offsetHeight;
@@ -142,6 +151,8 @@ function tick(){
     applyPositionForRow(3, 0, row1, height, width, rowHeight, rowWidths[0]);
     applyPositionForRow(3, 1, row2, height, width, rowHeight, rowWidths[1]);
     applyPositionForRow(3, 2, row3, height, width, rowHeight, rowWidths[2]);
+
+    //alert("height: " + height + ", width: " + width + "rowHeight: " + rowHeight + ", rowWidths: " + rowWidths);
   }
 
   // Remove dots from 3rd row when minute is not at XX:X4.
