@@ -27,7 +27,7 @@ var words = ['f&uuml;nf', 'zehn', 'viertel', 'zwanzig', 'halb', 'nach', 'vor', '
 // index:         0          1        2          3        4       5       6       7        8
 
 // Colors needed
-var colors = [[166,166,166], [224,224,13], [61,204,64], [72,74,212], [201,18,18]];
+var colors = [[100,100,100], [224,224,13], [61,204,64], [72,74,212], [201,18,18]];
 // color:         grey          yellow        green        blue          red
 // used for:     0-6am           9am          12am         3pm           6pm
 
@@ -127,23 +127,19 @@ function tick(){
   // Change position of rows only once every 5 minutes (when text content needs
   // to be updated). Also compute position when the page is loaded the first time,
   // independent of the current time.
-  if(min%5 == 0 || !firstLoadDone){
+  if(min%1 == 0 || !firstLoadDone){
     // Determine height and width of the browser viewport.
-    var height = window.innerHeight; // There is no top or bottom margin because default line height takes care of that.
+    var height = window.innerHeight; // There is no top or bottom margin anymore
     var width = window.innerWidth - 50; // -50px because there is a 50px margin (see .css)
-
-    // Set padding to 0 in order to prevent accumulation of padding pixels each tick()-call.
-    row1.children[0].style.paddingLeft = "0px";
-    row2.children[0].style.paddingLeft = "0px";
-    row3.children[0].style.paddingLeft = "0px";
-    // Setting margin to 0 actually not needed because clientWidth/etc. all don't take margins into account.
-    row1.style.marginTop = "0px";
-    row2.style.marginTop = "0px";
-    row3.style.marginTop = "0px";
 
     // Determine height and widths of the 3 rows.
     var rowHeight = row1.clientHeight || row1.scrollHeight || row1.offsetHeight;
     var rowWidths = [];
+
+    // Set left padding to 0 to prevent paddingLeft accumulation in each iteration
+    row1.children[0].style.paddingLeft = "0px";
+    row2.children[0].style.paddingLeft = "0px";
+    row3.children[0].style.paddingLeft = "0px";
     rowWidths[0] = row1.children[0].clientWidth || row1.children[0].scrollWidth || row1.children[0].offsetWidth;
     rowWidths[1] = row2.children[0].clientWidth || row2.children[0].scrollWidth || row2.children[0].offsetWidth;
     rowWidths[2] = row3.children[0].clientWidth || row3.children[0].scrollWidth || row3.children[0].offsetWidth;
@@ -152,7 +148,7 @@ function tick(){
     applyPositionForRow(3, 1, row2, height, width, rowHeight, rowWidths[1]);
     applyPositionForRow(3, 2, row3, height, width, rowHeight, rowWidths[2]);
 
-    //alert("height: " + height + ", width: " + width + "rowHeight: " + rowHeight + ", rowWidths: " + rowWidths);
+    //alert("height: " + height + ", width:" + width + ", rowHeight:" + rowHeight + ", rowWidths: " + rowWidths);
   }
 
   // Remove dots from 3rd row when minute is not at XX:X4.
