@@ -1,4 +1,5 @@
-sudo shutdown -h now
+sudo shutdown -h now (halt,shutdown)
+sudo shutdown -r now (reboot)
 sudo raspi-config (user koennen auto-login'd werden)
 // epiphany browser ist speziell fuer raspberrypi zugeschnitten, allerdings helle pixelzeile oben. daher umgesteigen auf chromium.
 df (-H): zeigt speicherplatz an (verfuegbar/belegt)
