@@ -1,4 +1,7 @@
-changes to etc/xdg/lxsessions/LXDE/autostart :
+changes to etc/xdg/lxsessions/LXDE/autostart 
+UND etc/xdg/lxsessions/LXDE-pi/autostart 
+---> evtl das zweite verzeichnis erstellen wenn nicht vorhanden
+in beide dateien folgenden inhalt einfuegen
 
 
 @lxpanel --profile LXDE
@@ -8,7 +11,4 @@ changes to etc/xdg/lxsessions/LXDE/autostart :
 @xset s noblank
 @xset s off
 @xset -dpms
-@sh /home/pi/lcduhr/startup.sh
-
-
-# @chromium /home/pi/lcduhr/index.html --kiosk --incognito
+/home/pi/lcduhr/startup.sh
