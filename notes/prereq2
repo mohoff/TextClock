@@ -1,0 +1,14 @@
+changes to etc/xdg/lxsessions/LXDE/autostart :
+
+
+@lxpanel --profile LXDE
+@pcmanfm --desktop --profile LXDE
+# @xscreensaver -no-splash
+
+@xset s noblank
+@xset s off
+@xset -dpms
+@sh /home/pi/lcduhr/startup.sh
+
+
+# @chromium /home/pi/lcduhr/index.html --kiosk --incognito
