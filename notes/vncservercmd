@@ -1,1 +1,6 @@
 vncserver :1 -geometry 1280x1024 -depth 24 -dpi 96
+
+besser (hat sicher funktioninert):
+vncserver :1 -geometry 1280x1024 -depth 16 -pixelformat rgb565
+
+(da die uhr auf display :0 laufen soll, wird remote UI über vncserver auf display :1 angeboten)
