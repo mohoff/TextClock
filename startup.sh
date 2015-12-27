@@ -72,8 +72,6 @@ unclutter &
 # Kill all existing process with partial name "chromium"
 pkill -f chromium
 # You can cancel kiosk mode with ALT+F4 or by killing the process in any way
-touch ~/FIRST.txt
 chromium /home/pi/lcduhr/index.html --kiosk --incognito
-touch ~/SECOND.txt
 
 

@@ -127,7 +127,7 @@ function tick(){
   // Change position of rows only once every 5 minutes (when text content needs
   // to be updated). Also compute position when the page is loaded the first time,
   // independent of the current time.
-  if(min%1 == 0 || !firstLoadDone){
+  if(min%5 == 0 || !firstLoadDone){
     // Determine height and width of the browser viewport.
     var height = window.innerHeight; // There is no top or bottom margin anymore
     var width = window.innerWidth - 50; // -50px because there is a 50px margin (see .css)
