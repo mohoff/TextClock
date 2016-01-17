@@ -49,6 +49,8 @@ var combinations = [
 
 var hours = ['zw&ouml;lf', 'eins', 'zwei', 'drei', 'vier', 'f&uuml;nf', 'sechs', 'sieben', 'acht', 'neun', 'zehn', 'elf'];
 var output;
+var infoGlobal;
+var info = [];
 
 function getColor(currentDate){
   var hr = currentDate.getHours();
@@ -87,10 +89,16 @@ function getColor(currentDate){
 }
 
 function applyPositionForRow(numberOfRows, rowIndex, rowObj, height, width, rowHeight, rowWidth){
-  var offsetTop = Math.random() * (height - (rowObj.getBoundingClientRect().top + (numberOfRows-rowIndex)*rowHeight));
+  var r1 = Math.random();
+  var r2 = Math.random();
+
+  var offsetTop = r1 * (height - (rowObj.getBoundingClientRect().top + (numberOfRows-rowIndex)*rowHeight));
   rowObj.style.marginTop = offsetTop + "px";
-  var offsetLeft = Math.random() * (width-rowWidth);
+  var offsetLeft = r2 * (width-rowWidth);
   rowObj.children[0].style.paddingLeft = offsetLeft + "px";
+
+  // DEBUG INFO part2
+  info[rowIndex].innerHTML = info[rowIndex].innerHTML + "LPad: [0-" + (width-rowWidth) + "]->" + offsetLeft.toFixed(1) + "px, TMar: [0-" + (height - (rowObj.getBoundingClientRect().top + (numberOfRows-rowIndex)*rowHeight)).toFixed(1) + "]->" + offsetTop.toFixed(1) + "px";
 
   //console.log("maxOffsetTop: " + (height - (rowObj.getBoundingClientRect().top + (numberOfRows-rowIndex)*rowHeight)) + ", offsetTop: " + offsetTop);
   //console.log("maxOffsetLeft: " + (width-rowWidth) + ", offsetLeft: " + offsetLeft);
@@ -100,6 +108,10 @@ function tick(){
   var row1 = document.getElementById("row1");
   var row2 = document.getElementById("row2");
   var row3 = document.getElementById("row3");
+  infoGlobal = document.getElementById("info-global");
+  info[0] = document.getElementById("info-1");
+  info[1] = document.getElementById("info-2");
+  info[2] = document.getElementById("info-3");
 
   var currentDate = new Date();
   var hr = currentDate.getHours() % 12;    // [0 ... 11]
@@ -144,6 +156,12 @@ function tick(){
     rowWidths[1] = row2.children[0].clientWidth || row2.children[0].scrollWidth || row2.children[0].offsetWidth;
     rowWidths[2] = row3.children[0].clientWidth || row3.children[0].scrollWidth || row3.children[0].offsetWidth;
 
+    // DEBUG INFO part1
+    infoGlobal.innerHTML = "GLOBAL: w(" + width + "), h(" + height + ")";
+    info[0].innerHTML = "ROW1: w(" + rowWidths[0] + "), h(" + rowHeight + "), ";
+    info[1].innerHTML = "ROW2: w(" + rowWidths[1] + "), h(" + rowHeight + "), ";
+    info[2].innerHTML = "ROW3: w(" + rowWidths[2] + "), h(" + rowHeight + "), ";
+
     applyPositionForRow(3, 0, row1, height, width, rowHeight, rowWidths[0]);
     applyPositionForRow(3, 1, row2, height, width, rowHeight, rowWidths[1]);
     applyPositionForRow(3, 2, row3, height, width, rowHeight, rowWidths[2]);
@@ -159,6 +177,9 @@ function tick(){
   for(var i=0; i<rows.length; i++) {
     rows[i].style.color = getColor(currentDate);
   }
+
+
+
 
   // Set information for next function call that the page was already loaded the
   // first time.
