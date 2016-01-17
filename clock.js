@@ -25,6 +25,7 @@ var firstLoadDone = false;
 // Words needed
 var words = ['f&uuml;nf', 'zehn', 'viertel', 'zwanzig', 'halb', 'nach', 'vor', 'genau', 'es ist'];
 // index:         0          1        2          3        4       5       6       7        8
+// sometimes special chars are not rendered properly. Then, escape 'fünf' to 'f&uuml;nf'
 
 // Colors needed
 var colors = [[100,100,100], [224,224,13], [61,204,64], [72,74,212], [201,18,18]];
@@ -129,7 +130,7 @@ function tick(){
   row2.children[0].innerHTML = words[combinations[minIndex][numOfWords-1]];
 
   // Content of 3rd row
-  if(min < 25){
+  if(min < 20){
     row3.children[0].innerHTML = hours[hr];
   } else {
     row3.children[0].innerHTML = hours[(hr+1)%12];
