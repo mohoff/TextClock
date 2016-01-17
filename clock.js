@@ -23,7 +23,7 @@
 var firstLoadDone = false;
 
 // Words needed
-var words = ['f&uuml;nf', 'zehn', 'viertel', 'zwanzig', 'halb', 'nach', 'vor', 'genau', 'es ist'];
+var words = ['fünf', 'zehn', 'viertel', 'zwanzig', 'halb', 'nach', 'vor', 'genau', 'es ist'];
 // index:         0          1        2          3        4       5       6       7        8
 // sometimes special chars are not rendered properly. Then, escape 'fünf' to 'f&uuml;nf'
 
@@ -48,7 +48,9 @@ var combinations = [
   // UHR
 ];
 
-var hours = ['zw&ouml;lf', 'eins', 'zwei', 'drei', 'vier', 'f&uuml;nf', 'sechs', 'sieben', 'acht', 'neun', 'zehn', 'elf'];
+var hours = ['zwölf', 'eins', 'zwei', 'drei', 'vier', 'f&uuml;nf', 'sechs', 'sieben', 'acht', 'neun', 'zehn', 'elf'];
+// index:         0          1        2      3        4         5          6        7        8       9       10      11
+// sometimes special chars are not rendered properly. Then, escape 'fünf' to 'f&uuml;nf'
 var output;
 var infoGlobal;
 var info = [];
