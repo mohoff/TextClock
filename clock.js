@@ -96,12 +96,17 @@ function applyPositionForRow(numberOfRows, rowIndex, rowObj, height, width, rowH
   var r2 = Math.random();
 
   var offsetTop = r1 * (height - (rowObj.getBoundingClientRect().top + (numberOfRows-rowIndex)*rowHeight));
+
+  // DEBUG INFO part3
+  info[rowIndex].innerHTML = info[rowIndex].innerHTML + "TMar: [0-" + (height - (rowObj.getBoundingClientRect().top + (numberOfRows-rowIndex)*rowHeight)).toFixed(1) + "]->" + offsetTop.toFixed(1) + "px -- TBCR(" + rowObj.getBoundingClientRect().top.toFixed(1) + "), rAbzug" + (rowIndex+1) + "(" + ((numberOfRows-rowIndex)*rowHeight).toFixed(1) + ")";
+
   rowObj.style.marginTop = offsetTop + "px";
   var offsetLeft = r2 * (width-rowWidth);
   rowObj.children[0].style.paddingLeft = offsetLeft + "px";
 
   // DEBUG INFO part2
-  info[rowIndex].innerHTML = info[rowIndex].innerHTML + "LPad: [0-" + (width-rowWidth) + "]->" + offsetLeft.toFixed(1) + "px, TMar: [0-" + (height - (rowObj.getBoundingClientRect().top + (numberOfRows-rowIndex)*rowHeight)).toFixed(1) + "]->" + offsetTop.toFixed(1) + "px";
+  //info[rowIndex].innerHTML = info[rowIndex].innerHTML + "LPad: [0-" + (width-rowWidth) + "]->" + offsetLeft.toFixed(1) + "px, TMar: [0-" + (height - (rowObj.getBoundingClientRect().top + (numberOfRows-rowIndex)*rowHeight)).toFixed(1) + "]->" + offsetTop.toFixed(1) + "px";
+
 
   //console.log("maxOffsetTop: " + (height - (rowObj.getBoundingClientRect().top + (numberOfRows-rowIndex)*rowHeight)) + ", offsetTop: " + offsetTop);
   //console.log("maxOffsetLeft: " + (width-rowWidth) + ", offsetLeft: " + offsetLeft);
