@@ -1,30 +1,24 @@
 // Kombinationen:
 /*
 
-  ES IST
-
+  "es ist" genau 0
   fünf nach 0
   zehn nach 0
   viertel nach 0
   zwanzig nach 0
   fünf vor halb 1
-  halb 1
+  "es ist" halb 1
   fünf nach halb 1
   zehn nach halb 1
   viertel vor 1
   zehn vor 1
   fünf vor 1
 
-  UHR
-
 */
-
-// Flag to enable random positioning when page is loaded the first time
-var firstLoadDone = false;
 
 // Words needed
 var words = ['fünf', 'zehn', 'viertel', 'zwanzig', 'halb', 'nach', 'vor', 'genau', 'es ist'];
-// index:         0          1        2          3        4       5       6       7        8
+// index:      0       1        2           3        4       5       6       7        8
 // sometimes special chars are not rendered properly. Then, escape 'fünf' to 'f&uuml;nf'
 
 // Colors needed
@@ -51,15 +45,20 @@ var combinations = [
 var hours = ['zwölf', 'eins', 'zwei', 'drei', 'vier', 'f&uuml;nf', 'sechs', 'sieben', 'acht', 'neun', 'zehn', 'elf'];
 // index:         0          1        2      3        4         5          6        7        8       9       10      11
 // sometimes special chars are not rendered properly. Then, escape 'fünf' to 'f&uuml;nf'
-var output;
+
+// Flag to enable random positioning when page is loaded the first time
+var firstLoadDone = false;
+
+var width, height;
+var rows, row1, row2, row3;
+var hr, min;
+
 var infoGlobal;
 var info = [];
 
 function getColor(currentDate){
   var hr = currentDate.getHours();
   var min = currentDate.getMinutes();
-
-  //alert("hr(" + hr + "), " + Math.min(4, (Math.floor(hr/3)-2)));
 
   var colorStartIndex = Math.min(4, (Math.floor(hr/3)-2));
   var colorStart = colors[colorStartIndex];
@@ -91,11 +90,15 @@ function getColor(currentDate){
   return 'rgb(' + colorNow[0] + ',' + colorNow[1] + ',' + colorNow[2] + ')';
 }
 
-function applyPositionForRow(numberOfRows, rowIndex, rowObj, height, width, rowHeight, rowWidth){
+function setPositionForRow(numberOfRows, rowIndex, rowObj, height, width, rowHeight, rowWidth){
+  // Generate two distinct random numbers
   var r1 = Math.random();
   var r2 = Math.random();
+
+  // Reset margins and paddings
   rowObj.style.margin = "0px";
   rowObj.children[0].style.padding = "0px";
+
   /*rowObj.children[0].style.fontSize = rowHeight + "px";
   rowObj.children[0].style.lineHeight = rowHeight + "px";*/
 
@@ -104,30 +107,17 @@ function applyPositionForRow(numberOfRows, rowIndex, rowObj, height, width, rowH
   // DEBUG INFO part3
   info[rowIndex].innerHTML = info[rowIndex].innerHTML + "TMar: [0-" + (height - (rowObj.getBoundingClientRect().top + (numberOfRows-rowIndex)*rowHeight)).toFixed(1) + "]->" + offsetTop.toFixed(1) + "px -- TBCR(" + rowObj.getBoundingClientRect().top.toFixed(1) + "), rAbzug" + (rowIndex+1) + "(" + ((numberOfRows-rowIndex)*rowHeight).toFixed(1) + ")";
 
+  // Set top offset
   rowObj.style.marginTop = offsetTop + "px";
+  // Set left offset
   var offsetLeft = r2 * (width-rowWidth);
   rowObj.children[0].style.paddingLeft = offsetLeft + "px";
 
   // DEBUG INFO part2
-  //info[rowIndex].innerHTML = info[rowIndex].innerHTML + "LPad: [0-" + (width-rowWidth) + "]->" + offsetLeft.toFixed(1) + "px, TMar: [0-" + (height - (rowObj.getBoundingClientRect().top + (numberOfRows-rowIndex)*rowHeight)).toFixed(1) + "]->" + offsetTop.toFixed(1) + "px";
-
-
-  //console.log("maxOffsetTop: " + (height - (rowObj.getBoundingClientRect().top + (numberOfRows-rowIndex)*rowHeight)) + ", offsetTop: " + offsetTop);
-  //console.log("maxOffsetLeft: " + (width-rowWidth) + ", offsetLeft: " + offsetLeft);
+  info[rowIndex].innerHTML = info[rowIndex].innerHTML + "LPad: [0-" + (width-rowWidth) + "]->" + offsetLeft.toFixed(1) + "px, TMar: [0-" + (height - (rowObj.getBoundingClientRect().top + (numberOfRows-rowIndex)*rowHeight)).toFixed(1) + "]->" + offsetTop.toFixed(1) + "px";
 }
 
-function tick(){
-  var row1 = document.getElementById("row1");
-  var row2 = document.getElementById("row2");
-  var row3 = document.getElementById("row3");
-  infoGlobal = document.getElementById("info-global");
-  info[0] = document.getElementById("info-1");
-  info[1] = document.getElementById("info-2");
-  info[2] = document.getElementById("info-3");
-
-  var currentDate = new Date();
-  var hr = currentDate.getHours() % 12;    // [0 ... 11]
-  var min = currentDate.getMinutes();      // [0 ... 59]
+function setTexts(row1, row2, row3, hr, min){
   var minIndex = Math.floor(min/5);
   var numOfWords = combinations[minIndex].length;
 
@@ -147,17 +137,50 @@ function tick(){
     row3.children[0].innerHTML = hours[(hr+1)%12];
   }
   row3.children[0].innerHTML = row3.children[0].innerHTML + "....";
+  // Remove dots from 3rd row when minute is not at XX:X4.
+  // Dots indicate exact minute for XX:X1, XX:X2, XX:X3 and XX:X4.
+  row3.children[0].innerHTML = row3.children[0].innerHTML.substr(0, row3.children[0].innerHTML.length-(4-(min%5)));
+}
+
+function setColors(currentDate){
+  // Set computed color for all 3 rows.
+  for(var i=0; i<rows.length; i++) {
+    rows[i].style.color = getColor(currentDate);
+  }
+}
+
+function tick(){
+  // Init relevant DOM-objects
+  if(firstLoadDone === false){
+    // Determine height and width of the browser viewport.
+    height = window.innerHeight; // There is no top or bottom margin anymore
+    width = window.innerWidth - 50; // Substract (marginLeft+marginRight) of wrapper div (see #wrapper in style.css)
+    // Rows 1-3 which will contain time
+    rows = document.getElementsByClassName("row");
+    row1 = document.getElementById("row1");
+    row2 = document.getElementById("row2");
+    row3 = document.getElementById("row3");
+    // Objects for debugging info
+    infoGlobal = document.getElementById("info-global");
+    info[0] = document.getElementById("info-1");
+    info[1] = document.getElementById("info-2");
+    info[2] = document.getElementById("info-3");
+  }
+
+  // Get current time
+  var currentDate = new Date();
+  hr = currentDate.getHours() % 12;    // [0 ... 11]
+  min = currentDate.getMinutes();      // [0 ... 59]
+
+  setTexts(row1, row2, row3, hr, min);
+  setColors(currentDate);
 
   // Change position of rows only once every 5 minutes (when text content needs
   // to be updated). Also compute position when the page is loaded the first time,
   // independent of the current time.
-  if(min%1 == 0 || !firstLoadDone){
-    // Determine height and width of the browser viewport.
-    var height = window.innerHeight; // There is no top or bottom margin anymore
-    var width = window.innerWidth - 50; // -50px because there is a 50px margin (see .css)
-
+  if(min%5 == 0 || !firstLoadDone){
     // Determine height and widths of the 3 rows.
-    var rowHeight = row2.clientHeight || row2.scrollHeight || row2.offsetHeight;
+    var rowHeight = row1.clientHeight || row1.scrollHeight || row1.offsetHeight;
     var rowWidths = [];
 
     // Set left padding to 0 to prevent paddingLeft accumulation in each iteration
@@ -174,26 +197,15 @@ function tick(){
     info[1].innerHTML = "ROW2: w(" + rowWidths[1] + "), h(" + rowHeight + "), ";
     info[2].innerHTML = "ROW3: w(" + rowWidths[2] + "), h(" + rowHeight + "), ";
 
-    applyPositionForRow(3, 0, row1, height, width, rowHeight, rowWidths[0]);
-    applyPositionForRow(3, 1, row2, height, width, rowHeight, rowWidths[1]);
-    applyPositionForRow(3, 2, row3, height, width, rowHeight, rowWidths[2]);
+    setPositionForRow(3, 0, row1, height, width, rowHeight, rowWidths[0]);
+    setPositionForRow(3, 1, row2, height, width, rowHeight, rowWidths[1]);
+    setPositionForRow(3, 2, row3, height, width, rowHeight, rowWidths[2]);
   }
-
-  // Remove dots from 3rd row when minute is not at XX:X4.
-  row3.children[0].innerHTML = row3.children[0].innerHTML.substr(0, row3.children[0].innerHTML.length-(4-(min%5)));
-
-  // Apply computed color to all 3 rows.
-  var rows = document.getElementsByClassName("row");
-  for(var i=0; i<rows.length; i++) {
-    rows[i].style.color = getColor(currentDate);
-  }
-
-
-
 
   // Set information for next function call that the page was already loaded the
   // first time.
   firstLoadDone = true;
+
   // Call this function again after 60s.
   setTimeout(tick, 60000);
 };
