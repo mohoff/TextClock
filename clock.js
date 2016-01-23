@@ -94,6 +94,10 @@ function getColor(currentDate){
 function applyPositionForRow(numberOfRows, rowIndex, rowObj, height, width, rowHeight, rowWidth){
   var r1 = Math.random();
   var r2 = Math.random();
+  rowObj.style.margin = "0px";
+  rowObj.children[0].style.padding = "0px";
+  /*rowObj.children[0].style.fontSize = rowHeight + "px";
+  rowObj.children[0].style.lineHeight = rowHeight + "px";*/
 
   var offsetTop = r1 * (height - (rowObj.getBoundingClientRect().top + (numberOfRows-rowIndex)*rowHeight));
 
@@ -147,13 +151,13 @@ function tick(){
   // Change position of rows only once every 5 minutes (when text content needs
   // to be updated). Also compute position when the page is loaded the first time,
   // independent of the current time.
-  if(min%5 == 0 || !firstLoadDone){
+  if(min%1 == 0 || !firstLoadDone){
     // Determine height and width of the browser viewport.
     var height = window.innerHeight; // There is no top or bottom margin anymore
     var width = window.innerWidth - 50; // -50px because there is a 50px margin (see .css)
 
     // Determine height and widths of the 3 rows.
-    var rowHeight = row1.clientHeight || row1.scrollHeight || row1.offsetHeight;
+    var rowHeight = row2.clientHeight || row2.scrollHeight || row2.offsetHeight;
     var rowWidths = [];
 
     // Set left padding to 0 to prevent paddingLeft accumulation in each iteration
@@ -173,8 +177,6 @@ function tick(){
     applyPositionForRow(3, 0, row1, height, width, rowHeight, rowWidths[0]);
     applyPositionForRow(3, 1, row2, height, width, rowHeight, rowWidths[1]);
     applyPositionForRow(3, 2, row3, height, width, rowHeight, rowWidths[2]);
-
-    //alert("height: " + height + ", width:" + width + ", rowHeight:" + rowHeight + ", rowWidths: " + rowWidths);
   }
 
   // Remove dots from 3rd row when minute is not at XX:X4.

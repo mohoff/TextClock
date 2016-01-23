@@ -1,4 +1,5 @@
 body {
+  /*font-family: 'Times New Roman';*/
   background-color: #050508;
   color: white;
   width: 100%;
@@ -14,6 +15,14 @@ body {
 }
 
 .row {
+  overflow: hidden;
+}
+
+.row > * {
+  /*background-color: #222;*/
+  display: inline-block;
+  padding: 0;
+  margin: 0;
   font-size: 20vh;
 }
 
@@ -27,7 +36,3 @@ body {
   margin: 0;
   padding: 0;
 }
-
-/*.row > * {
-  background-color: #222;
-}*/
