@@ -48,6 +48,7 @@ var hours = ['zwölf', 'eins', 'zwei', 'drei', 'vier', 'f&uuml;nf', 'sechs', 'si
 
 // Flag to enable random positioning when page is loaded the first time
 var firstLoadDone = false;
+var DEBUG = true;
 
 var width, height;
 var rows, row1, row2, row3;
@@ -90,7 +91,10 @@ function getColor(currentDate){
   return 'rgb(' + colorNow[0] + ',' + colorNow[1] + ',' + colorNow[2] + ')';
 }
 
-function setPositionForRow(numberOfRows, rowIndex, rowObj, height, width, rowHeight, rowWidth){
+function setPositionForRow(rowIndex, numberOfRows, rowObj, rowHeight){
+  // Get individual width of row at rowIndex
+  rowWidth = rowObj.children[0].clientWidth || rowObj.children[0].scrollWidth || rowObj.children[0].offsetWidth;
+
   // Generate two distinct random numbers
   var r1 = Math.random();
   var r2 = Math.random();
@@ -102,19 +106,20 @@ function setPositionForRow(numberOfRows, rowIndex, rowObj, height, width, rowHei
   /*rowObj.children[0].style.fontSize = rowHeight + "px";
   rowObj.children[0].style.lineHeight = rowHeight + "px";*/
 
+  // Calculate top and left offset
   var offsetTop = r1 * (height - (rowObj.getBoundingClientRect().top + (numberOfRows-rowIndex)*rowHeight));
-
-  // DEBUG INFO part3
-  info[rowIndex].innerHTML = info[rowIndex].innerHTML + "TMar: [0-" + (height - (rowObj.getBoundingClientRect().top + (numberOfRows-rowIndex)*rowHeight)).toFixed(1) + "]->" + offsetTop.toFixed(1) + "px -- TBCR(" + rowObj.getBoundingClientRect().top.toFixed(1) + "), rAbzug" + (rowIndex+1) + "(" + ((numberOfRows-rowIndex)*rowHeight).toFixed(1) + ")";
-
-  // Set top offset
-  rowObj.style.marginTop = offsetTop + "px";
-  // Set left offset
   var offsetLeft = r2 * (width-rowWidth);
-  rowObj.children[0].style.paddingLeft = offsetLeft + "px";
 
-  // DEBUG INFO part2
-  info[rowIndex].innerHTML = info[rowIndex].innerHTML + "LPad: [0-" + (width-rowWidth) + "]->" + offsetLeft.toFixed(1) + "px, TMar: [0-" + (height - (rowObj.getBoundingClientRect().top + (numberOfRows-rowIndex)*rowHeight)).toFixed(1) + "]->" + offsetTop.toFixed(1) + "px";
+  if(DEBUG){
+    info[rowIndex].innerHTML = "ROW" + rowIndex + ": w(" + rowWidth + "), h(" + rowHeight + "), " +
+      "LPad: [0-" + (width-rowWidth) + "]->" + offsetLeft.toFixed(1) + "px, " +
+      "TMar: [0-" + (height - (rowObj.getBoundingClientRect().top + (numberOfRows-rowIndex)*rowHeight)).toFixed(1) + "]->" + offsetTop.toFixed(1) + "px, " +
+      "TBCR(" + rowObj.getBoundingClientRect().top.toFixed(1) + "), rowAbzug" + (rowIndex+1) + "(" + ((numberOfRows-rowIndex)*rowHeight).toFixed(1) + ")";
+  }
+
+  // Set top and left offset
+  rowObj.style.marginTop = offsetTop + "px";
+  rowObj.children[0].style.paddingLeft = offsetLeft + "px";
 }
 
 function setTexts(row1, row2, row3, hr, min){
@@ -150,21 +155,27 @@ function setColors(currentDate){
 }
 
 function tick(){
-  // Init relevant DOM-objects
-  if(firstLoadDone === false){
+  // Init relevant variables once
+  if(!firstLoadDone){
     // Determine height and width of the browser viewport.
     height = window.innerHeight; // There is no top or bottom margin anymore
     width = window.innerWidth - 50; // Substract (marginLeft+marginRight) of wrapper div (see #wrapper in style.css)
-    // Rows 1-3 which will contain time
+    // Init rows 1-3 which will contain time
     rows = document.getElementsByClassName("row");
     row1 = document.getElementById("row1");
     row2 = document.getElementById("row2");
     row3 = document.getElementById("row3");
-    // Objects for debugging info
-    infoGlobal = document.getElementById("info-global");
-    info[0] = document.getElementById("info-1");
-    info[1] = document.getElementById("info-2");
-    info[2] = document.getElementById("info-3");
+    // Init structure for debugging info
+    if(DEBUG){
+      infoGlobal = document.getElementById("info-global");
+      info[0] = document.getElementById("info-1");
+      info[1] = document.getElementById("info-2");
+      info[2] = document.getElementById("info-3");
+    }
+  }
+
+  if(DEBUG){
+    infoGlobal.innerHTML = "GLOBAL: w(" + width + "), h(" + height + ")";
   }
 
   // Get current time
@@ -181,25 +192,10 @@ function tick(){
   if(min%5 == 0 || !firstLoadDone){
     // Determine height and widths of the 3 rows.
     var rowHeight = row1.clientHeight || row1.scrollHeight || row1.offsetHeight;
-    var rowWidths = [];
 
-    // Set left padding to 0 to prevent paddingLeft accumulation in each iteration
-    row1.children[0].style.paddingLeft = "0px";
-    row2.children[0].style.paddingLeft = "0px";
-    row3.children[0].style.paddingLeft = "0px";
-    rowWidths[0] = row1.children[0].clientWidth || row1.children[0].scrollWidth || row1.children[0].offsetWidth;
-    rowWidths[1] = row2.children[0].clientWidth || row2.children[0].scrollWidth || row2.children[0].offsetWidth;
-    rowWidths[2] = row3.children[0].clientWidth || row3.children[0].scrollWidth || row3.children[0].offsetWidth;
-
-    // DEBUG INFO part1
-    infoGlobal.innerHTML = "GLOBAL: w(" + width + "), h(" + height + ")";
-    info[0].innerHTML = "ROW1: w(" + rowWidths[0] + "), h(" + rowHeight + "), ";
-    info[1].innerHTML = "ROW2: w(" + rowWidths[1] + "), h(" + rowHeight + "), ";
-    info[2].innerHTML = "ROW3: w(" + rowWidths[2] + "), h(" + rowHeight + "), ";
-
-    setPositionForRow(3, 0, row1, height, width, rowHeight, rowWidths[0]);
-    setPositionForRow(3, 1, row2, height, width, rowHeight, rowWidths[1]);
-    setPositionForRow(3, 2, row3, height, width, rowHeight, rowWidths[2]);
+    setPositionForRow(0, 3, row1, rowHeight);
+    setPositionForRow(1, 3, row2, rowHeight);
+    setPositionForRow(2, 3, row3, rowHeight);
   }
 
   // Set information for next function call that the page was already loaded the
