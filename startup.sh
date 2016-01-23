@@ -3,6 +3,7 @@
 # Pings default gateway. If it replies, assume internet connection
 function has_internet () {
   echo "Checking internet connection..."
+  # in bash: 0 = internet, 1 = no internet
   ping -q -w 1 -c 1 `ip r | grep default | cut -d ' ' -f 3` > /dev/null && return 0 || return 1
 }
 
@@ -54,7 +55,7 @@ function set_time_manually () {
     read -p "Do you confirm (yes/no)? " yn
     case $yn in
       [Yy]* ) sudo date -s "$date"; break;;
-      [Nn]* ) set_time_manually; break;;  
+      [Nn]* ) set_time_manually; break;;
       * ) echo "Please answer with yes or no.";;
     esac
   done
@@ -62,8 +63,10 @@ function set_time_manually () {
 
 # Set system time
 if has_internet; then
+  echo "Setting time AUTOMATICALLY"
   set_time
 else
+  echo "Setting time MANUALLY"
   set_time_manually
 fi
 
@@ -78,5 +81,3 @@ chromium /home/pi/lcduhr/index.html --kiosk --incognito
 
 # OPTIONAL: Start vnc server to enable remote connections with remote GUI (in Ubuntu clients you can use preinstalled tool Remmina in order to connect with vnc server)
 #vncserver :1 -geometry 1280x1024 -depth 16 -pixelformat rgb565
-
-
