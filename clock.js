@@ -81,7 +81,14 @@ function getColor(currentDate){
   }
   // stepIndex resets every 3 hours (except during night)
   // 3h intervals = 3*12 = 36 5-minute-steps => startColor + endColor + 35 shades
-  var stepIndex = (hr%3)*12 + min/5;
+
+  // Compute stepSize in interval [0...36]. Usually for 3h, except from 6pm-0am where it's for 6h
+  var stepIndex;
+  if(hr >= 18 && hr <= 23){
+    stepIndex = (hr%6)*6 + min/10;
+  } else {
+    stepIndex = (hr%3)*12 + min/5;
+  }
 
   // Compute final color
   var colorNow = [];
