@@ -155,11 +155,11 @@ function setColors(currentDate){
 }
 
 function tick(){
-  // Init relevant variables once
+  // Init relevant variables
+  // Determine height and width of the browser viewport.
+  height = window.innerHeight; // There is no top or bottom margin anymore
+  width = window.innerWidth - 50; // Substract (marginLeft+marginRight) of wrapper div (see #wrapper in style.css)
   if(!firstLoadDone){
-    // Determine height and width of the browser viewport.
-    height = window.innerHeight; // There is no top or bottom margin anymore
-    width = window.innerWidth - 50; // Substract (marginLeft+marginRight) of wrapper div (see #wrapper in style.css)
     // Init rows 1-3 which will contain time
     rows = document.getElementsByClassName("row");
     row1 = document.getElementById("row1");
