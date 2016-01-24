@@ -25,11 +25,12 @@ body {
 
 span {
   /*background-color: #222;*/
-  display: inline-block;
+  /*display: inline-block;*/
   padding: 0;
   margin: 0;
   font-size: 20vh;
-  line-height: 20vh;
+  /*height: 20vh;*/
+  line-height: 25vh;
 }
 
 #info {
