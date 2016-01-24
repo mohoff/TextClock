@@ -42,7 +42,7 @@ var combinations = [
   // UHR
 ];
 
-var hours = ['zwölf', 'eins', 'zwei', 'drei', 'vier', 'f&uuml;nf', 'sechs', 'sieben', 'acht', 'neun', 'zehn', 'elf'];
+var hours = ['zwölf', 'eins', 'zwei', 'drei', 'vier', 'fünf', 'sechs', 'sieben', 'acht', 'neun', 'zehn', 'elf'];
 // index:         0          1        2      3        4         5          6        7        8       9       10      11
 // sometimes special chars are not rendered properly. Then, escape 'fünf' to 'f&uuml;nf'
 
