@@ -48,7 +48,7 @@ var hours = ['zwölf', 'eins', 'zwei', 'drei', 'vier', 'f&uuml;nf', 'sechs', 'si
 
 // Flag to enable random positioning when page is loaded the first time
 var firstLoadDone = false;
-var DEBUG = false;
+var DEBUG = true;
 
 var width, height;
 var rows, row1, row2, row3;
