@@ -1,5 +1,14 @@
 #!/bin/bash
 
+function echo_loop () {
+  max=100
+  for i in `seq 2 $max`
+  do
+      echo "WORKING"
+  done
+
+}
+
 # Pings default gateway. If it replies, assume internet connection
 function has_internet () {
   echo "Checking internet connection..."
@@ -17,6 +26,7 @@ function set_time () {
 
 # Sets system time according to user input
 function set_time_manually () {
+  echo_loop
   date=""
 
   read -p "Enter year (e.g. 2015): " year
