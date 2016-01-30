@@ -146,9 +146,7 @@ function setTexts(row1, row2, row3, hr, min){
     row3.children[0].innerHTML = hours[(hr+1)%12];
   }
   row3.children[0].innerHTML = row3.children[0].innerHTML + "....";
-  // Remove dots from 3rd row when minute is not at XX:X4.
-  // Dots indicate exact minute for XX:X1, XX:X2, XX:X3 and XX:X4.
-  row3.children[0].innerHTML = row3.children[0].innerHTML.substr(0, row3.children[0].innerHTML.length-(4-(min%5)));
+
 }
 
 function setColors(currentDate){
@@ -204,6 +202,12 @@ function tick(){
     setPositionForRow(1, 3, row2, rowHeight);
     setPositionForRow(2, 3, row3, rowHeight);
   }
+
+  // Remove dots from 3rd row when minute is not at XX:X4.
+  // Dots indicate exact minute for XX:X1, XX:X2, XX:X3 and XX:X4.
+  // For setting row position there need to be 4 dots.
+  // So we remove needless dots after setPositionForRow()
+  row3.children[0].innerHTML = row3.children[0].innerHTML.substr(0, row3.children[0].innerHTML.length-(4-(min%5)));
 
   // Set information for next function call that the page was already loaded the
   // first time.
