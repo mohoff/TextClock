@@ -190,8 +190,6 @@ function tick(){
   hr = currentDate.getHours() % 12;    // [0 ... 11]
   min = currentDate.getMinutes();      // [0 ... 59]
 
-  hr = 15;
-  min = 38;
   setTexts(row1, row2, row3, hr, min);
   setColors(currentDate);
 
