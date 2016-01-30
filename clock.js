@@ -99,6 +99,10 @@ function getColor(currentDate){
 }
 
 function setPositionForRow(rowIndex, numberOfRows, rowObj, rowHeight){
+  // Reset margins and paddings
+  rowObj.style.margin = "0px";
+  rowObj.children[0].style.padding = "0px";
+
   // Get individual width of row at rowIndex
   rowWidth = rowObj.children[0].clientWidth || rowObj.children[0].scrollWidth || rowObj.children[0].offsetWidth;
 
@@ -106,16 +110,9 @@ function setPositionForRow(rowIndex, numberOfRows, rowObj, rowHeight){
   var r1 = Math.random();
   var r2 = Math.random();
 
-  // Reset margins and paddings
-  rowObj.style.margin = "0px";
-  rowObj.children[0].style.padding = "0px";
-
-  /*rowObj.children[0].style.fontSize = rowHeight + "px";
-  rowObj.children[0].style.lineHeight = rowHeight + "px";*/
-
   // Calculate top and left offset
   var offsetTop = r1 * (height - (rowObj.getBoundingClientRect().top + (numberOfRows-rowIndex)*rowHeight));
-  var offsetLeft = r2 * (width-rowWidth);
+  var offsetLeft = r2 * (width-(rowWidth));
 
   if(DEBUG){
     info[rowIndex].innerHTML = "ROW" + rowIndex + ": w(" + rowWidth + "), h(" + rowHeight + "), " +
@@ -166,6 +163,9 @@ function tick(){
   // Determine height and width of the browser viewport.
   height = window.innerHeight; // There is no top or bottom margin anymore
   width = window.innerWidth - 50; // Substract (marginLeft+marginRight) of wrapper div (see #wrapper in style.css)
+
+  //alert(window.innerWidth + ", " + document.innerWidth);
+
   if(!firstLoadDone){
     // Init rows 1-3 which will contain time
     rows = document.getElementsByClassName("row");
@@ -182,7 +182,7 @@ function tick(){
   }
 
   if(DEBUG){
-    infoGlobal.innerHTML = "GLOBAL: w(" + width + "), h(" + height + ")";
+    infoGlobal.innerHTML = "GLOBAL: w(" + width + "), h(" + height + "), window.innerWidth(" + window.innerWidth + ")";
   }
 
   // Get current time
@@ -190,6 +190,8 @@ function tick(){
   hr = currentDate.getHours() % 12;    // [0 ... 11]
   min = currentDate.getMinutes();      // [0 ... 59]
 
+  hr = 15;
+  min = 38;
   setTexts(row1, row2, row3, hr, min);
   setColors(currentDate);
 

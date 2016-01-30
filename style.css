@@ -14,13 +14,14 @@ body {
 
 #wrapper {
   position: relative;
+  white-space: nowrap;
   height: 100%;
   margin-left: 25px;
   margin-right: 25px;
 }
 
 .row {
-  overflow: hidden;
+  /*overflow: hidden;*/
 }
 
 span {
