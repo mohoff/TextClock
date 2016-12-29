@@ -22,7 +22,7 @@ var words = ['fünf', 'zehn', 'viertel', 'zwanzig', 'halb', 'nach', 'vor', 'gena
 // sometimes special chars are not rendered properly. Then, escape 'fünf' to 'f&uuml;nf'
 
 // Colors needed
-var colors = [[100,100,100], [224,224,13], [61,204,64], [72,74,212], [201,18,18]];
+var colors = [[100,100,100], [224,224,13], [61,204,64], [92,143,255], [201,18,18]];
 // color:         grey          yellow        green        blue          red
 // used for:     0-6am           9am          12am         3pm           6pm
 
