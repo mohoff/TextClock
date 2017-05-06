@@ -1,5 +1,5 @@
 #!/bin/bash
-lxterminal -e bash /home/pi/lcduhr/time.sh
+#lxterminal -e bash /home/pi/lcduhr/time.sh
 
 # Removes mouse cursor from display when idle
 unclutter &
