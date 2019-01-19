@@ -1,11 +1,11 @@
 ES IST
 
 
-FÜNF VOR ZEHN (UND) VIERTEL ZWANZIG NACH HALB VOR
+Fï¿½NF VOR ZEHN (UND) VIERTEL ZWANZIG NACH HALB VOR
 
 
-EINS ZWEI DREI VIER FÜNF SECHS SIEBEN ACHT NEUN ZEHN ELF ZWÖLF
--->ACHT EINS-SECHS-SIEBEN-NEUN ZWEI ZEHN ZWÖLF-FÜNF DREI ELF VIER 
+EINS ZWEI DREI VIER Fï¿½NF SECHS SIEBEN ACHT NEUN ZEHN ELF ZWï¿½LF
+-->ACHT EINS-SECHS-SIEBEN-NEUN ZWEI ZEHN ZWï¿½LF-Fï¿½NF DREI ELF VIER 
 
 UHR
 
@@ -15,36 +15,36 @@ UHR
 
 ES IST
 
-FÜNF VOR ZEHN VIERTEL WANZIG NACH HALB VOR
+Fï¿½NF VOR ZEHN VIERTEL WANZIG NACH HALB VOR
 
-FÜNFVORZEHNVIERTELZWANZIGNACHHALBVOR
+Fï¿½NFVORZEHNVIERTELZWANZIGNACHHALBVOR
 
-fünf vor
-fünf nach
+fï¿½nf vor
+fï¿½nf nach
 zehn nach
 zehn vor
 viertel nach
 viertel vor
 zwanzig vor
 zwanzig nach
-fünf vor halb
-fünf nach halb
+fï¿½nf vor halb
+fï¿½nf nach halb
 
 
-1.) zwafnzvieühnfrgtel	vornachhalb			--> 29 buchstaben
+1.) zwafnzvieï¿½hnfrgtel	vornachhalb			--> 29 buchstaben
 2.) zwfuanzvigehnfrtel	vornachhalb			--> 29 buchstaben
 
 
 1.) ASZWODRELFVINCHSTERBEUENF 					--> 25 buchstaben // +29 = 54 buchstaben
 2.)       	    ZWO   E                     LF						EINS ZWEI DREI VIER FUENF SECHS SIEBEN ACHT NEUN ZEHN ELF
-	FU    	    ZWO   E                   N LF 				--> fuenf, elf, zwölf
-	FU    	    ZWO   E          H   I    N LF 				--> fuenf, elf, zwölf, zwei, zehn
-	FU DR 	    ZWO   E          H   I    N LF L S 				--> fuenf, elf, zwölf, zwei, zehn, eins, drei
-	FU DR 	    ZWO   E          H   I    N LF L S 				--> fuenf, elf, zwölf, zwei, zehn, eins, drei			// vier, sechs, sieben, acht, neun
-	FU DR S   I ZWO   E        C H   I BE N LF L S 				--> fuenf, elf, zwölf, zwei, zehn, eins, drei, sechs, sieben		// vier, acht, neun
-	   DR S   I ZWO N E   FU   C H   I BE N LF L S 				--> fuenf, elf, zwölf, zwei, zehn, eins, drei, sechs, sieben, neun		// vier, acht
-	   DR S V I ZWO N E R FU A C H T I BE N LF L S 				--> fuenf, elf, zwölf, zwei, zehn, eins, drei, sechs, sieben, neun, vier, acht
-	   DR S V I ZWO N E R FU A C H T I BE N LF L S 				--> fuenf, elf, zwölf, zwei, zehn, eins, drei, sechs, sieben, neun, vier, acht, null
+	FU    	    ZWO   E                   N LF 				--> fuenf, elf, zwï¿½lf
+	FU    	    ZWO   E          H   I    N LF 				--> fuenf, elf, zwï¿½lf, zwei, zehn
+	FU DR 	    ZWO   E          H   I    N LF L S 				--> fuenf, elf, zwï¿½lf, zwei, zehn, eins, drei
+	FU DR 	    ZWO   E          H   I    N LF L S 				--> fuenf, elf, zwï¿½lf, zwei, zehn, eins, drei			// vier, sechs, sieben, acht, neun
+	FU DR S   I ZWO   E        C H   I BE N LF L S 				--> fuenf, elf, zwï¿½lf, zwei, zehn, eins, drei, sechs, sieben		// vier, acht, neun
+	   DR S   I ZWO N E   FU   C H   I BE N LF L S 				--> fuenf, elf, zwï¿½lf, zwei, zehn, eins, drei, sechs, sieben, neun		// vier, acht
+	   DR S V I ZWO N E R FU A C H T I BE N LF L S 				--> fuenf, elf, zwï¿½lf, zwei, zehn, eins, drei, sechs, sieben, neun, vier, acht
+	   DR S V I ZWO N E R FU A C H T I BE N LF L S 				--> fuenf, elf, zwï¿½lf, zwei, zehn, eins, drei, sechs, sieben, neun, vier, acht, null
 	   --> 25 Buchstaben
 	   
 	 ----  
@@ -75,7 +75,7 @@ fünf nach halb
 	
 	DRAFT 1:
 
-		(KREIS)(FORM DIE DREIECK VERVOLLSTÄNDIGT)
+		(KREIS)(FORM DIE DREIECK VERVOLLSTï¿½NDIGT)
 		
 		E S
 		I S T
@@ -112,7 +112,7 @@ fünf nach halb
 	
 	
 	
-	algorithmus-ansätze:
+	algorithmus-ansï¿½tze:
 	--------------------------
 	var min = new Date().getMinutes();
 	var hr = new Date().getSeconds();
@@ -137,7 +137,7 @@ fünf nach halb
 		
 	minutenzahl = factormin*10+min;		// Minutenanzahl auf 5er-steps gerundet
 	sekundenanzahl = 0;
-	(minutenanzahl >= 25)?				// für z.B. "halb VIER" für "15:30Uhr"
+	(minutenanzahl >= 25)?				// fï¿½r z.B. "halb VIER" fï¿½r "15:30Uhr"
 		stundenanzahl++;
 		
 	switch($minutenzahl):{
@@ -168,7 +168,7 @@ fünf nach halb
 	(9) :"neun"
 	(10):"zehn"
 	(11):"elf"
-	(12):"zwölf"
+	(12):"zwï¿½lf"
 	}
 	
 	$zu_suchenden_string = $minutenzahl + $stundenzahl;			// strings addieren

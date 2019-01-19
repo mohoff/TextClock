@@ -1,0 +1,36 @@
+{
+  "name": "textclock",
+  "version": "1.0.0",
+  "description": "Full-screen browser app that displays the current time in words (german)",
+  "main": "tick.js",
+  "scripts": {
+    "start": "NODE_ENV=production node src/tick.js",
+    "start:dev": "NODE_ENV=development node src/tick.js",
+    "lint": "eslint --fix src/**/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mohoff/TextClock.git"
+  },
+  "keywords": [
+    "clock",
+    "text",
+    "raspberrypi"
+  ],
+  "author": "Moritz Hoffmann",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mohoff/TextClock/issues"
+  },
+  "homepage": "https://github.com/mohoff/TextClock#readme",
+  "devDependencies": {
+    "eslint": "^5.12.1",
+    "eslint-config-prettier": "^3.5.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "prettier": "^1.15.3"
+  },
+  "dependencies": {
+    "bunyan": "^1.8.12",
+    "dotenv": "^6.2.0"
+  }
+}

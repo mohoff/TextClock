@@ -1,9 +1,15 @@
-@font-face { font-family: RomanSerif; src: url('fonts/RomanSerif.ttf'); }
-@font-face { font-family: RomanSerif; font-style: oblique; src: url('fonts/RomanSerif-Oblique.ttf'); }
+@font-face {
+  font-family: RomanSerif;
+  src: url("fonts/RomanSerif.ttf");
+}
+@font-face {
+  font-family: RomanSerif;
+  font-style: oblique;
+  src: url("fonts/RomanSerif-Oblique.ttf");
+}
 
 body {
   font-family: RomanSerif, serif;
-  /*font-style: oblique;*/
   background-color: #050508;
   color: white;
   width: 100%;
@@ -20,17 +26,10 @@ body {
   margin-right: 25px;
 }
 
-.row {
-  /*overflow: hidden;*/
-}
-
 span {
-  /*background-color: #222;*/
-  /*display: inline-block;*/
   padding: 0;
   margin: 0;
   font-size: 20vh;
-  /*height: 20vh;*/
   line-height: 25vh;
 }
 
