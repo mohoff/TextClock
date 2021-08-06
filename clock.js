@@ -188,6 +188,7 @@ function tick(){
   var currentDate = new Date();
   hr = currentDate.getHours() % 12;    // [0 ... 11]
   min = currentDate.getMinutes();      // [0 ... 59]
+  sec = currentDate.getSeconds();      // [0 ... 59]
 
   setTexts(row1, row2, row3, hr, min);
   setColors(currentDate);
@@ -215,5 +216,5 @@ function tick(){
   firstLoadDone = true;
 
   // Call this function again after 60s.
-  setTimeout(tick, 60000);
+  setTimeout(tick, 60000-(sec*1000)); // correction for missing seconds (update should occur on full minutes)
 };
