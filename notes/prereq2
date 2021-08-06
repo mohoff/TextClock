@@ -1,5 +1,5 @@
-changes to etc/xdg/lxsessions/LXDE/autostart 
-UND etc/xdg/lxsessions/LXDE-pi/autostart 
+changes to etc/xdg/lxsession/LXDE/autostart 
+UND etc/xdg/lxsession/LXDE-pi/autostart 
 ---> evtl das zweite verzeichnis erstellen wenn nicht vorhanden
 in beide dateien folgenden inhalt einfuegen
 
@@ -11,4 +11,4 @@ in beide dateien folgenden inhalt einfuegen
 @xset s noblank
 @xset s off
 @xset -dpms
-/home/pi/lcduhr/startup.sh
+/home/pi/TextClock/startup.sh
