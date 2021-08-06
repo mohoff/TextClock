@@ -1,8 +1,0 @@
-sudo shutdown -h now (halt,shutdown)
-sudo shutdown -r now (reboot)
-sudo raspi-config (user koennen auto-login'd werden)
-// epiphany browser ist speziell fuer raspberrypi zugeschnitten, allerdings helle pixelzeile oben. daher umgesteigen auf chromium.
-df (-H): zeigt speicherplatz an (verfuegbar/belegt)
-wenn raspberry hardwareclock hat (externes device), dann kann command hwclock sinn machen
-startx started die GUI (nachdem user nach bootvorgang angemeldet ist)
-tool nmap explored ip netz: z.b. ip des raspberrypis herausfinden von anderem linux rechner mit: nmap 198.168.178.0/24 (oder so aehnlich...)
