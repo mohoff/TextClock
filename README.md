@@ -33,6 +33,14 @@ sudo apt install unclutter git chromium-browser systemd-timesyncd ntp lxde-core 
 
 Some of these tools might be pre-installed
 
+### Uninstall screensaver
+
+Once the clock was started, the screensaver kicks in after a few minutes. To prevent this, the screensaver can be uninstalled.
+
+```sh
+sudo apt remove xscreensaver -y
+```
+
 ### Download the TextClock application
 
 ```sh
@@ -78,7 +86,7 @@ sudo raspi-config
 
 ### Enable automatic time update
 
-Make sure the ntp daemon and `systemd-timesyncd` are running by checking `service status <SERVICE>`.
+Make sure the `ntp` daemon and `systemd-timesyncd` are running by checking `service status <SERVICE>`. Installation of these services might require reboots that brings up the daemons.
 
 Then, enable NTP as the time synchronization tool used by `timedatectl`
 
